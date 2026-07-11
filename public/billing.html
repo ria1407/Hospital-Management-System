@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Billing</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Billing Records</h1>
+
+<table border="1" align="center">
+    <thead>
+        <tr>
+            <th>Bill ID</th>
+            <th>Patient ID</th>
+            <th>Total Amount</th>
+        </tr>
+    </thead>
+    <tbody id="billingTable"></tbody>
+</table>
+
+<script>
+
+async function loadBills() {
+
+    const res = await fetch('/billing');
+    const data = await res.json();
+
+    let rows = "";
+
+    data.forEach(bill => {
+        rows += `
+        <tr>
+            <td>${bill.bill_id}</td>
+            <td>${bill.patient_id}</td>
+            <td>${bill.total_amount}</td>
+        </tr>`;
+    });
+
+    document.getElementById("billingTable").innerHTML = rows;
+}
+
+loadBills();
+
+</script>
+
+</body>
+</html>

@@ -2,13 +2,13 @@
 
 A web-based Hospital Management System built using Node.js.
 
-## Features
+#Features
 
 - Patient management
 - Appointment scheduling
 - Dashboard interface
 
-## Technologies Used
+# Technologies Used
 
 - Node.js
 - Express.js

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Hospital Dashboard</h1>
+
+<div>
+    <h2>Total Statistics</h2>
+
+    <p>Patients: <span id="patients">0</span></p>
+    <p>Doctors: <span id="doctors">0</span></p>
+    <p>Available Rooms: <span id="rooms">0</span></p>
+</div>
+
+<script>
+
+async function loadCounts() {
+
+    const res = await fetch('/counts');
+    const data = await res.json();
+
+    document.getElementById('patients').innerText = data.patients;
+    document.getElementById('doctors').innerText = data.doctors;
+    document.getElementById('rooms').innerText = data.rooms;
+}
+
+loadCounts();
+
+</script>
+
+</body>
+</html>

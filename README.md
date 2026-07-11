@@ -2,7 +2,7 @@
 
 A web-based Hospital Management System built using Node.js.
 
-#Features
+##Features
 
 - Patient management
 - Appointment scheduling

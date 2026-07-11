@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patients</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Patient Management</h1>
+
+    <input type="text" id="name" placeholder="Patient Name">
+    <input type="number" id="age" placeholder="Age">
+
+    <select id="gender">
+        <option>Male</option>
+        <option>Female</option>
+    </select>
+
+    <button onclick="addPatient()">Add Patient</button>
+
+    <h2>Patient List</h2>
+
+    <table border="1" align="center">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+            </tr>
+        </thead>
+        <tbody id="patients"></tbody>
+    </table>
+
+<script>
+
+async function loadPatients() {
+
+    const res = await fetch('/patients');
+    const data = await res.json();
+
+    let rows = "";
+
+    data.forEach(patient => {
+
+        rows += `
+        <tr>
+            <td>${patient.patient_id}</td>
+            <td>${patient.name}</td>
+            <td>${patient.age}</td>
+            <td>${patient.gender}</td>
+        </tr>`;
+    });
+
+    document.getElementById("patients").innerHTML = rows;
+}
+
+async function addPatient() {
+
+    const name = document.getElementById("name").value;
+    const age = document.getElementById("age").value;
+    const gender = document.getElementById("gender").value;
+
+    await fetch('/patients', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({name, age, gender})
+    });
+
+    loadPatients();
+}
+
+loadPatients();
+
+</script>
+
+</body>
+</html>

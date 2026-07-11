@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctors</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Doctors</h1>
+
+<table border="1" align="center">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Specialization</th>
+        </tr>
+    </thead>
+    <tbody id="doctorTable"></tbody>
+</table>
+
+<script>
+
+async function loadDoctors() {
+
+    const res = await fetch('/doctors');
+    const data = await res.json();
+
+    let rows = "";
+
+    data.forEach(doc => {
+        rows += `
+        <tr>
+            <td>${doc.doctor_id}</td>
+            <td>${doc.name}</td>
+            <td>${doc.specialization}</td>
+        </tr>`;
+    });
+
+    document.getElementById("doctorTable").innerHTML = rows;
+}
+
+loadDoctors();
+
+</script>
+
+</body>
+</html>
